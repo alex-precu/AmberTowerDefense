@@ -47,6 +47,19 @@ Actor* Tower::Shoot()
 
 }
 
+void Tower::SetFireRate(float rate)
+{
+	fireRate = rate;
+}
+float Tower::GetFireRate()
+{
+	return fireRate;
+}
+void Update()
+{
+	// implement Update / fire rate
+}
+
 Tower::Tower()
 {
 }

@@ -13,42 +13,102 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Actors">
+      <UniqueIdentifier>{06b0a950-2fdc-40a9-a8e2-7379a1f84147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actors">
+      <UniqueIdentifier>{713e6778-f464-4b68-a479-0a162d610edd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actors\Towers">
+      <UniqueIdentifier>{21c4842d-9d99-47af-98c4-38cfe404a551}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actors\Enemies">
+      <UniqueIdentifier>{6b259a5c-ecfd-4248-983c-2530d73e1c47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actors\Towers">
+      <UniqueIdentifier>{155fd420-d31e-4b99-bbd7-92cc9a4b939e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actors\Enemies">
+      <UniqueIdentifier>{8653ea99-9ddb-44ee-be96-8aacb9e0fa81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Masters">
+      <UniqueIdentifier>{6fed7a19-3ad1-40b6-977a-6d2a61292819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Masters">
+      <UniqueIdentifier>{1e658b9d-1ad7-482c-b6cb-e3088df1101e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Actor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tower.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Actors</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Tower.cpp">
+      <Filter>Source Files\Actors\Towers</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Actors\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="GameMaster.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Masters</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldBuilder.cpp">
+      <Filter>Source Files\Masters</Filter>
+    </ClCompile>
+    <ClCompile Include="Store.cpp">
+      <Filter>Source Files\Masters</Filter>
+    </ClCompile>
+    <ClCompile Include="FireTower.cpp">
+      <Filter>Source Files\Actors\Towers</Filter>
+    </ClCompile>
+    <ClCompile Include="IceTower.cpp">
+      <Filter>Source Files\Actors\Towers</Filter>
+    </ClCompile>
+    <ClCompile Include="ArmouredEnemy.cpp">
+      <Filter>Source Files\Actors\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="FastEnemy.cpp">
+      <Filter>Source Files\Actors\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tower.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Actors</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Tower.h">
+      <Filter>Header Files\Actors\Towers</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Actors\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="GameMaster.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Masters</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldBuilder.h">
+      <Filter>Header Files\Masters</Filter>
+    </ClInclude>
+    <ClInclude Include="Store.h">
+      <Filter>Header Files\Masters</Filter>
+    </ClInclude>
+    <ClInclude Include="FireTower.h">
+      <Filter>Header Files\Actors\Towers</Filter>
+    </ClInclude>
+    <ClInclude Include="IceTower.h">
+      <Filter>Header Files\Actors\Towers</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmouredEnemy.h">
+      <Filter>Header Files\Actors\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="FastEnemy.h">
+      <Filter>Header Files\Actors\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

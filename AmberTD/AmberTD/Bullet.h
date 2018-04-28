@@ -7,7 +7,6 @@ class Bullet : public Actor
 	float damage;
 	std::string element;
 	float elementalDamage;
-	//I have no fucking clue
 
 public:
 	void Update();

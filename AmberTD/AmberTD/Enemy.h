@@ -14,5 +14,6 @@ public:
 
 	int GetHP();
 	float GetSpeed();
+	void CollisionDetect();
 };
 
