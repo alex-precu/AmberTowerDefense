@@ -1,17 +1,18 @@
 #pragma once
-#include "Actor.h"
+#include <SFML\Graphics.hpp>
 #include <string>
+#include "enums.h"
 
-class Enemy : public Actor
+class Enemy : public sf::CircleShape
 {
 	int hp;
 	float speed;
 	std::string element;
 
 public:
-	Enemy();
+	Enemy(int xPos,int yPos);
 	~Enemy();
-
+	Enemy();
 	int GetHP();
 	float GetSpeed();
 	void CollisionDetect();

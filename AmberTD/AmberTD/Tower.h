@@ -1,9 +1,9 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include "Actor.h"
 #include <vector>
+#include "enums.h"
 
-class Tower : public Actor 
+class Tower : public sf::CircleShape
 {
 	int level;
 	float damage;
@@ -17,6 +17,7 @@ class Tower : public Actor
 
 public:
 	Tower();
+	Tower(int xPos, int yPos);
 	~Tower();
 	void UpgradeLevel();
 	int GetLevel();
@@ -25,7 +26,7 @@ public:
 	float GetFireRate();
 	void Update();
 	sf::Vector2f GetPosition();
-	Actor* Shoot(); 
+	
 
 };
 

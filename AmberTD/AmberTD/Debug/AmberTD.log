@@ -1,2 +1,6 @@
-﻿  main.cpp
+﻿  Enemy.cpp
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\enemy.cpp(16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Tower.cpp
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\tower.cpp(61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
   AmberTD.vcxproj -> C:\Users\antha\Documents\GitHub\AmberTowerDefense\AmberTD\Debug\AmberTD.exe

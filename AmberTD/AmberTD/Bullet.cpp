@@ -52,7 +52,7 @@ float Bullet::GetElementalDamage()
 bool Bullet::CollisionDetect()
 {
 
-
+	return false;
 }
 
 

@@ -1,0 +1,21 @@
+#pragma once
+#include <SFML/Window.hpp>
+
+
+const int TILE_OFFSET = 2;
+const int GUI_OFFSET = 320;
+const int TILE_SIZE = 80;
+const float ENEMY_SIZE = 30;
+
+enum GroundType {
+	hill = 0,
+	path
+};
+
+enum FullHdresolution {
+	x = 1920,
+	y = 1080
+};
+
+
+

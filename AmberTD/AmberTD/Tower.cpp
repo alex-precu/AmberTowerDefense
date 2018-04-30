@@ -1,4 +1,5 @@
 #include "Tower.h"
+#include "Bullet.h"
 
 void Tower::UpgradeLevel()
 {
@@ -40,12 +41,6 @@ sf::Vector2f Tower::GetPosition()
 {
 	return position;
 }
-Actor* Tower::Shoot()
-{
-	// implement shooting
-	
-
-}
 
 void Tower::SetFireRate(float rate)
 {
@@ -60,10 +55,16 @@ void Update()
 	// implement Update / fire rate
 }
 
+Tower::Tower(int xPos,int yPos)
+{
+	this->setRadius(TILE_SIZE/2);
+	this->setPosition(xPos, yPos);
+	this->setFillColor(sf::Color(255, 0, 127));
+}
 Tower::Tower()
 {
-}
 
+}
 
 Tower::~Tower()
 {

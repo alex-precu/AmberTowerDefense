@@ -1,6 +1,5 @@
 #include "GameMaster.h"
-#include "Actor.h"
-
+#include <SFML/Graphics.hpp>
 
 
 

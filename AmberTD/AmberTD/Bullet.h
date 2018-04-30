@@ -1,8 +1,8 @@
 #pragma once
-#include "Actor.h"
+#include <SFML\Graphics.hpp>
 #include <string>
 #include <vector>
-class Bullet : public Actor
+class Bullet : public sf::Shape
 {
 	float damage;
 	std::string element;
