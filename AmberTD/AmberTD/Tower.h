@@ -9,6 +9,7 @@ class Tower : public sf::CircleShape
 	float damage;
 	float range;
 	float fireRate;
+	int price;
 	sf::Vector2f position;
 	void SetDamage();
 	void SetRange();

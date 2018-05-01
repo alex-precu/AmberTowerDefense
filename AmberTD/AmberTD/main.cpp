@@ -5,6 +5,7 @@
 #include "enums.h"
 #include "WorldBuilder.h"
 #include "GroundTile.h"
+#include "Tower.h"
 
 void Draw(std::vector<sf::RectangleShape> world, sf::RenderWindow &window)
 {
@@ -45,8 +46,8 @@ int main()
 				if (event.mouseButton.button == sf::Mouse::Left)
 				{
 					ContainsMouse( world.GetMap() , sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-				}
-				
+				}	
+			
 			}
 		}
 		window.clear(sf::Color::Black);
