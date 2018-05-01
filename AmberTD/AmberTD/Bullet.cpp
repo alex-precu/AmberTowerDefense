@@ -12,6 +12,7 @@ Bullet::Bullet(float damage)
 }
 Bullet::Bullet(float damage, std::string element, float elementalDamage)
 {
+	this->damage = damage;
 
 }
 

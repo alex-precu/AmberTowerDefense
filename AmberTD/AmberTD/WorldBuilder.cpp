@@ -18,7 +18,7 @@ void WorldBuilder::CreateWorld()
 	{
 		for (int j = 5; j < FullHdresolution::y - 70; j += TILE_SIZE)
 		{
-			if (j == 497)
+			if (j == 503)
 			{
 				path = GroundType::path;
 			}
@@ -41,7 +41,7 @@ void WorldBuilder::LoadLevel()
 
 
 
-std::vector<sf::RectangleShape>& WorldBuilder::GetMap()
+std::vector<sf::ConvexShape>& WorldBuilder::GetMap()
 {
 	return map;
 }

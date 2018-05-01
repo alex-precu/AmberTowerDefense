@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "enums.h"
 
-class GroundTile : public sf::RectangleShape
+class GroundTile : public sf::ConvexShape
 {
 	bool isOccupied = false;
 	char tileType = GroundType::hill;

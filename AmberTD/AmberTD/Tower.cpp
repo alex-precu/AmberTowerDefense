@@ -55,12 +55,31 @@ void Update()
 	// implement Update / fire rate
 }
 
-Tower::Tower(int xPos,int yPos)
+std::string Tower::GetName()
 {
-	this->setRadius(TILE_SIZE/2);
-	this->setPosition(xPos, yPos);
-	this->setFillColor(sf::Color(255, 0, 127));
+	return name;
 }
+
+Tower::Tower(int xPos,int yPos,TowerType type )
+{
+	this->setPointCount(3);
+	this->setPoint(0, sf::Vector2f(TILE_SIZE/2, 0));
+	this->setPoint(1, sf::Vector2f(TILE_SIZE/2-20 , TILE_SIZE));
+	this->setPoint(2, sf::Vector2f(TILE_SIZE/2+20, TILE_SIZE));
+
+	this->setOutlineThickness(2);
+	this->setPosition(sf::Vector2f(xPos, yPos));
+	
+	if (type == TowerType::basic)
+	{
+		this->setFillColor(sf::Color(128, 128, 128));
+	}
+	else
+	{
+		this->setFillColor(type == TowerType::fire ? sf::Color(255, 0, 0) : sf::Color(0, 0, 255));
+	}
+}
+
 Tower::Tower()
 {
 

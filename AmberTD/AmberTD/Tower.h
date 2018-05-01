@@ -2,9 +2,12 @@
 #include <SFML\Graphics.hpp>
 #include <vector>
 #include "enums.h"
+#include <string>
 
-class Tower : public sf::CircleShape
+
+class Tower : public sf::ConvexShape
 {
+	std::string name = "Basic Tower";
 	int level;
 	float damage;
 	float range;
@@ -18,8 +21,9 @@ class Tower : public sf::CircleShape
 
 public:
 	Tower();
-	Tower(int xPos, int yPos);
+	Tower(int xPos, int yPos, TowerType type);
 	~Tower();
+	std::string GetName();
 	void UpgradeLevel();
 	int GetLevel();
 	float GetDamage(); 

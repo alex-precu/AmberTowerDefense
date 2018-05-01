@@ -2,7 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include <string>
 #include <vector>
-class Bullet : public sf::Shape
+class Bullet : public sf::ConvexShape
 {
 	float damage;
 	std::string element;

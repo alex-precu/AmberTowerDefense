@@ -7,30 +7,12 @@
 #include "GroundTile.h"
 #include "Tower.h"
 
-void Draw(std::vector<sf::RectangleShape> world, sf::RenderWindow &window)
-{
-	for (int i = 0; i < world.size(); i++)
-	{
-		window.draw(world[i]);
-	}
-}
-void ContainsMouse(std::vector<sf::RectangleShape> &list, float x, float y)
-{
-	for (int i = 0; i < list.size();i++)
-	{
-		if (list[i].getGlobalBounds().contains(x, y))
-		{
-			list[i].setFillColor(sf::Color(255, 0, 0));
-			std::cout << list[i].getPosition().x << " and " << list[i].getPosition().y << std::endl;
-		}
-	}
-}
-
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(FullHdresolution::x, FullHdresolution::y), "Game");
 	WorldBuilder world;
 	world.CreateWorld();
+	GameMaster gameMaster(world.GetMap());
 
 	while (window.isOpen())
 	{
@@ -45,14 +27,18 @@ int main()
 			{
 				if (event.mouseButton.button == sf::Mouse::Left)
 				{
-					ContainsMouse( world.GetMap() , sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+					if (sf::Mouse::getPosition(window).x < world.GetMap()[0].getPosition().x)
+					{
+
+					}
+					//ContainsMouse( world.GetMap() , sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 				}	
 			
 			}
 		}
 		window.clear(sf::Color::Black);
 
-		Draw(world.GetMap(), window);
+		gameMaster.Render(window);
 	
 
 		window.display();

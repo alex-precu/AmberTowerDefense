@@ -3,14 +3,14 @@
 #include <string>
 #include "enums.h"
 
-class Enemy : public sf::CircleShape
+class Enemy : public sf::ConvexShape
 {
 	int hp;
 	float speed;
 	std::string element;
 
 public:
-	Enemy(int xPos,int yPos);
+	Enemy(int xPos,int yPos, EnemyType type);
 	~Enemy();
 	Enemy();
 	int GetHP();

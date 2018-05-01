@@ -10,13 +10,13 @@
 
 class WorldBuilder
 {
-	std::vector<sf::RectangleShape> map;
+	std::vector<sf::ConvexShape> map;
 
 public:
 	WorldBuilder();
 	~WorldBuilder();
 	void CreateWorld();
 	void LoadLevel();
-	std::vector<sf::RectangleShape> &GetMap();
+	std::vector<sf::ConvexShape> &GetMap();
 };
 
