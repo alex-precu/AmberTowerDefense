@@ -6,15 +6,16 @@
 class Enemy : public sf::ConvexShape
 {
 	int hp;
-	float speed;
-	std::string element;
+	int speed ;
+	int type;
 
 public:
 	Enemy(int xPos,int yPos, EnemyType type);
 	~Enemy();
 	Enemy();
+	void Update();
 	int GetHP();
-	float GetSpeed();
-	void CollisionDetect();
+	void SetHp(int damage);
+	int GetSpeed();
 };
 

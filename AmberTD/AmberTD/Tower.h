@@ -3,33 +3,44 @@
 #include <vector>
 #include "enums.h"
 #include <string>
+#include <iostream>
 
 
 class Tower : public sf::ConvexShape
 {
 	std::string name = "Basic Tower";
+	sf::CircleShape rangeHelper;
 	int level;
 	float damage;
 	float range;
 	float fireRate;
+	bool isReadyToFire = true;
+	bool isSelected = false;
+	bool isBuilt = false;
 	int price;
+	TowerType type;
 	sf::Vector2f position;
 	void SetDamage();
 	void SetRange();
-	void SetPosition(float dx, float dy);
 	void SetFireRate(float rate);
 
 public:
+	TowerType GetType();
 	Tower();
 	Tower(int xPos, int yPos, TowerType type);
 	~Tower();
 	std::string GetName();
+	sf::CircleShape DrawRangeF(sf::RenderWindow &window);
+	int GetPrice();
 	void UpgradeLevel();
 	int GetLevel();
 	float GetDamage(); 
 	float GetRange();
 	float GetFireRate();
-	void Update();
+	void SetState();
+	bool GetIsBuilt();
+	void Update(sf::RenderWindow &window);
+	//virtual void ReadyToFire();
 	sf::Vector2f GetPosition();
 	
 

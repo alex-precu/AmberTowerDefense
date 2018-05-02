@@ -147,7 +147,6 @@
     <ClInclude Include="GameMaster.h" />
     <ClInclude Include="GroundTile.h" />
     <ClInclude Include="IceTower.h" />
-    <ClInclude Include="Store.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="WorldBuilder.h" />
   </ItemGroup>

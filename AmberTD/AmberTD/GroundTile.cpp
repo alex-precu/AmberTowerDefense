@@ -5,6 +5,7 @@
 GroundTile::GroundTile(int xPos, int yPos, int type)
 {
 	this->setPointCount(4);
+	this->setOrigin(TILE_SIZE / 2, TILE_SIZE / 2);
 	this->setPoint(0, sf::Vector2f(0,0));
 	this->setPoint(1, sf::Vector2f(0 + TILE_SIZE, 0));
 	this->setPoint(2, sf::Vector2f(0 + TILE_SIZE, 0 +TILE_SIZE));
@@ -18,17 +19,23 @@ GroundTile::~GroundTile()
 {
 }
 
-void GroundTile::SetOcupy(bool state)
+bool GroundTile::GetIsEmpty()
 {
-	isOccupied = state;
+	return isEmpty;
 }
 
 void GroundTile::SetType(GroundType type)
 {
 	tileType = type;
+	this->setFillColor(type == GroundType::hill ? sf::Color::Yellow : sf::Color::White);
 }
 
 char GroundTile::GetTiletype()
 {
 	return tileType;
+}
+
+void GroundTile::SetIsEmpty(bool state)
+{
+	isEmpty = state;
 }

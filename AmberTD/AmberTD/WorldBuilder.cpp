@@ -14,34 +14,39 @@ WorldBuilder::~WorldBuilder()
 void WorldBuilder::CreateWorld()
 {
 	int path = 0;
-	for (int i = GUI_OFFSET; i < FullHdresolution::x - GUI_OFFSET; i += TILE_SIZE)
+	for (int j = 42; j < FullHdresolution::y; j += TILE_SIZE)
 	{
-		for (int j = 5; j < FullHdresolution::y - 70; j += TILE_SIZE)
+		for (int i = GUI_OFFSET; i < FullHdresolution::x - GUI_OFFSET; i += TILE_SIZE)
 		{
-			if (j == 503)
-			{
-				path = GroundType::path;
-			}
-			else
-			{
-				path = GroundType::hill;
-			}
-			GroundTile ground(i, j, path);
-			map.push_back(ground);
-			j += TILE_OFFSET;
+			map.push_back(new GroundTile(i, j, GroundType::hill));
+			i += TILE_OFFSET;
 		}
-		i += TILE_OFFSET;
+		j += TILE_OFFSET;
 	}
+	LoadLevel();
+
 }
+
 
 void WorldBuilder::LoadLevel()
 {
-	
+	for (int y = 0;y < lvlHeight; y++)
+	{
+		for (int x = 0; x < lvlWidth;x++)
+		{
+			int index = y * lvlWidth + x;
+			if (level[y][x] == 1)
+			{
+				map[index]->SetType(GroundType::path);
+			}
+		}
+	}
+
 }
 
 
 
-std::vector<sf::ConvexShape>& WorldBuilder::GetMap()
+std::vector<GroundTile*>WorldBuilder::GetMap()
 {
 	return map;
 }

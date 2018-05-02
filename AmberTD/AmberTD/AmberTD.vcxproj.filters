@@ -95,9 +95,6 @@
     <ClInclude Include="GameMaster.h">
       <Filter>Header Files\Masters</Filter>
     </ClInclude>
-    <ClInclude Include="Store.h">
-      <Filter>Header Files\Masters</Filter>
-    </ClInclude>
     <ClInclude Include="FireTower.h">
       <Filter>Header Files\Actors\Towers</Filter>
     </ClInclude>

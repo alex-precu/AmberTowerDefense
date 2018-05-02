@@ -5,12 +5,12 @@ int Enemy::GetHP()
 	return hp;
 }
 
-float Enemy::GetSpeed()
+int Enemy::GetSpeed()
 {
 	return speed;
 }
 
-Enemy::Enemy(int xPos, int yPos, EnemyType type)
+Enemy::Enemy(int xPos, int yPos, EnemyType type) : hp{ 100 }, speed{ 80 }
 {
 	this->setPointCount(6);
 	this->setPoint(0, sf::Vector2f(TILE_SIZE / 2, 0));
@@ -22,7 +22,7 @@ Enemy::Enemy(int xPos, int yPos, EnemyType type)
 	this->setPosition(xPos, yPos);
 	this->setFillColor(sf::Color(0, 255, 255));
 
-	if (type == EnemyType::basic)
+	if (type == EnemyType::normal)
 	{
 		this->setFillColor(sf::Color(0, 255 ,255));
 	}

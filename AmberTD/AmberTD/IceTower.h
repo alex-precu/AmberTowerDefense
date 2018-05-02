@@ -3,7 +3,9 @@
 
 class IceTower : public Tower
 {
+
 public:
+	//void ReadyToFire();
 	IceTower();
 	~IceTower();
 };

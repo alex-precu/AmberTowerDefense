@@ -1,16 +1,44 @@
 #include "GameMaster.h"
 #include <SFML/Graphics.hpp>
 
-void GameMaster::Render(sf::RenderWindow &window)
+void GameMaster::Render(sf::RenderWindow &window, Flags flag)
 {
 	UpdateGUI();
+
 	for (int i = 0;i < map.size();i++)
 	{
-		window.draw(map[i]);
+		if (flag == Flags::towerUnderConstruction && map[i]->GetIsEmpty())
+		{
+			if (map[i]->GetTiletype() == GroundType::hill)
+			{
+				map[i]->setFillColor(sf::Color::Green);
+			}
+			else
+			{
+				map[i]->setFillColor(sf::Color::Red);
+			}
+		}
+		else
+		{
+			if (map[i]->GetTiletype() == GroundType::hill)
+			{
+				map[i]->setFillColor(sf::Color::Yellow);
+			}
+			else
+			{
+				map[i]->setFillColor(sf::Color::White);
+			}
+		}
+		window.draw(*map[i]);
 	}
 
 	for (int i = 0; i < towerList.size(); i++)
 	{
+		if (!towerList[i]->GetIsBuilt())
+		{
+			window.draw(towerList[i]->DrawRangeF(window));
+		}
+		towerList[i]->Update(window);
 		window.draw(*towerList[i]);
 	}
 	for (int i = 0;i < enemyList.size();i++)
@@ -58,34 +86,131 @@ void GameMaster::loadFont()
 
 bool GameMaster::ContainsMouse(sf::Vector2i &position)
 {
-	if (position.x < map[0].getPosition().x)
+	if (position.x < map[0]->getPosition().x)
 	{
-		SearchInGUI();
+		return true;
 	}
 	else
 	{
-		SearchInMap();
+		return false;
 	}
 }
 
-void GameMaster::SearchInGUI()
+bool GameMaster::CheckMoney()
+{
+	if (underContruction->GetPrice() <= money)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool GameMaster::Construction(sf::Vector2i pos)
+{
+	for (int i = 0; i < gui.size();i++)
+	{
+		Tower* guiPtr = gui[i];
+		if (guiPtr->getGlobalBounds().contains(pos.x, pos.y))
+		{
+			std::cout << "Entity found at " << guiPtr->getPosition().x << " and " << guiPtr->getPosition().y << std::endl;
+			underContruction = guiPtr ;
+			if (CheckMoney())
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+void GameMaster::ActivateTowerBuilder()
+{
+	towerList.push_back(new Tower(underContruction->GetPosition().x, underContruction->GetPosition().y, underContruction->GetType()));
+	underContruction = nullptr;
+}
+
+void GameMaster::SearchInMap()
 {
 
 }
-
-void ContainsMouse(std::vector<sf::ConvexShape> &list, float x, float y)
+bool GameMaster::CheckPlacement(sf::Vector2i placement)
 {
-	for (int i = 0; i < list.size();i++)
+	for (int i = 0;i < map.size();i++)
 	{
-		if (list[i].getGlobalBounds().contains(x, y))
+		GroundTile* groundPtr = map[i];
+		if (groundPtr->getGlobalBounds().contains(placement.x, placement.y) && groundPtr->GetIsEmpty() && groundPtr->GetTiletype()!=GroundType::path)
 		{
-			list[i].setFillColor(sf::Color(255, 0, 0, 150));
-			std::cout << list[i].getPosition().x << " and " << list[i].getPosition().y << std::endl;
+			Tower* ptr = towerList.back();
+			ptr->setPosition(sf::Vector2f(map[i]->getPosition()));
+			ptr->setOrigin(sf::Vector2f(TILE_SIZE / 2, TILE_SIZE / 2));
+			ptr->SetState();
+			groundPtr->SetIsEmpty(false);
+			SpendMoney(ptr->GetPrice());
+			if (!ptr)
+			{
+				continue;
+			}
+			ptr->SetState();
+
+		return true;
+		}
+	}
+	return false;
+}
+
+void GameMaster::CancelTower()
+{
+	if (towerList.size())
+	{
+		towerList.pop_back();
+	}
+}
+
+sf::ConvexShape* GameMaster::SearchInTowers(sf::Vector2i pos)
+{
+	for (int i = 0; i < towerList.size();i++)
+	{
+		if (towerList[i]->getGlobalBounds().contains(pos.x, pos.y))
+		{
+			std::cout << "Entity found at " << towerList[i]->getPosition().x << " and " << towerList[i]->getPosition().y << std::endl;
+			return towerList[i];
 		}
 	}
 }
 
-GameMaster::GameMaster(std::vector<sf::ConvexShape> &Worldmap) : map{Worldmap}, money{300}, playerLifes{10}
+void GameMaster::SpendMoney(int amount)
+{
+	money -= amount;
+}
+
+void GameMaster::MakeEnemies()
+{
+	
+}
+
+void GameMaster::WaveMaker(WaveDifficulty difficulty)
+{
+	for (int i = 0; i < BOARD_HEIGHT - 1;i++)
+	{
+		if (map[i + BOARD_WIDTH]->GetTiletype() == GroundType::path)
+		{
+			for (int i = 0; i < difficulty; i++)
+			{
+				enemyList.push_back(new Enemy(map[i + BOARD_WIDTH]->getPosition().x + TILE_SIZE, map[i + BOARD_WIDTH]->getPosition().y + TILE_SIZE, EnemyType::normal));
+			}
+		}
+	}
+}
+
+void GameMaster::GameManager()
+{
+	while (playerLifes > 0)
+	{
+
+	}
+}
+
+GameMaster::GameMaster(std::vector<GroundTile*> Worldmap) : map{Worldmap}, money{300}, playerLifes{10}
 {
 	loadFont();
 	MakeGUI();

@@ -4,11 +4,12 @@
 
 class GroundTile : public sf::ConvexShape
 {
-	bool isOccupied = false;
+	bool isEmpty = true;
 	char tileType = GroundType::hill;
 
 public:
-	void SetOcupy(bool state);
+	void SetIsEmpty(bool state);
+	bool GetIsEmpty();
 	void SetType(GroundType type);
 	char GetTiletype();
 	GroundTile(int xPos,int yPos, int type);

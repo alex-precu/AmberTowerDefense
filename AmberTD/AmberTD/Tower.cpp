@@ -31,11 +31,7 @@ float Tower::GetRange()
 	return range;
 }
 	
-void Tower::SetPosition(float dx, float dy)
-{
-	position.x = dx;
-	position.y = dy;
-}
+
 
 sf::Vector2f Tower::GetPosition()
 {
@@ -50,9 +46,24 @@ float Tower::GetFireRate()
 {
 	return fireRate;
 }
-void Update()
+void Tower::Update(sf::RenderWindow &window)
 {
-	// implement Update / fire rate
+	if (!isBuilt)
+	{
+		this->setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+		DrawRangeF(window);
+	}
+}
+
+sf::CircleShape Tower::DrawRangeF(sf::RenderWindow &window)
+{ 
+	rangeHelper.setRadius(range);
+	rangeHelper.setFillColor(sf::Color::Transparent);
+	rangeHelper.setOutlineColor(this->getFillColor());
+	rangeHelper.setOutlineThickness(3);
+	rangeHelper.setOrigin(sf::Vector2f(this->GetRange(), this->GetRange()) );
+	rangeHelper.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+	return rangeHelper;
 }
 
 std::string Tower::GetName()
@@ -60,16 +71,15 @@ std::string Tower::GetName()
 	return name;
 }
 
-Tower::Tower(int xPos,int yPos,TowerType type )
+Tower::Tower(int xPos, int yPos, TowerType type) : damage{ 10 }, range{ 120 }, price{ 100 }, fireRate{ 2 }, level{1}
 {
 	this->setPointCount(3);
-	this->setPoint(0, sf::Vector2f(TILE_SIZE/2, 0));
-	this->setPoint(1, sf::Vector2f(TILE_SIZE/2-20 , TILE_SIZE));
-	this->setPoint(2, sf::Vector2f(TILE_SIZE/2+20, TILE_SIZE));
-
-	this->setOutlineThickness(2);
+	this->setPoint(0, sf::Vector2f(TILE_SIZE/2, TILE_SIZE/4));
+	this->setPoint(1, sf::Vector2f(TILE_SIZE*0.75 , TILE_SIZE*0.75));
+	this->setPoint(2, sf::Vector2f(TILE_SIZE*0.25, TILE_SIZE*0.75));
+	this->setOrigin(sf::Vector2f(TILE_SIZE / 2, TILE_SIZE / 2));
 	this->setPosition(sf::Vector2f(xPos, yPos));
-	
+	this->type = type;
 	if (type == TowerType::basic)
 	{
 		this->setFillColor(sf::Color(128, 128, 128));
@@ -79,7 +89,25 @@ Tower::Tower(int xPos,int yPos,TowerType type )
 		this->setFillColor(type == TowerType::fire ? sf::Color(255, 0, 0) : sf::Color(0, 0, 255));
 	}
 }
+TowerType Tower::GetType()
+{
+	return type;
+}
 
+int Tower::GetPrice()
+{
+	return price;
+}
+
+void Tower::SetState()
+{
+	isBuilt = true;
+}
+
+bool Tower::GetIsBuilt()
+{
+	return isBuilt;
+}
 Tower::Tower()
 {
 

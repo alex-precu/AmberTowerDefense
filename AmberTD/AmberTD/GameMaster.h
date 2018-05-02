@@ -6,15 +6,18 @@
 #include "IceTower.h"
 #include <iostream>
 #include <string>
+#include "Enemy.h"
+#include "GroundTile.h"
+#include "Bullet.h"
 
 class GameMaster
 	
 {
-	std::vector<sf::ConvexShape*> towerList;
-	std::vector<sf::ConvexShape*> enemyList;
-	std::vector<sf::ConvexShape*> bulletList;
-	std::vector<sf::ConvexShape> &map;
-	std::vector<sf::ConvexShape*> gui;
+	std::vector<Tower*> towerList;
+	std::vector<Enemy*> enemyList;
+	std::vector<Bullet*> bulletList;
+	std::vector<Tower*> gui;
+	Tower* underContruction;
 	int money;
 	int playerLifes;
 	sf::Font font;
@@ -23,23 +26,29 @@ class GameMaster
 	sf::Text moneyTxt;
 	
 public:
+	std::vector<GroundTile*> map;
+	bool CheckMoney();
 	bool ContainsMouse(sf::Vector2i &position);
-	void SearchInGUI();
+	bool Construction(sf::Vector2i pos);
+	sf::ConvexShape* SearchInTowers(sf::Vector2i pos);
+	bool CheckPlacement(sf::Vector2i placement);
 	void SearchInMap();
-	void Render(sf::RenderWindow &window);
+	void Render(sf::RenderWindow &window, Flags flag);
 	void UpdateGUI();
+	void CancelTower();
+	void WaveMaker(WaveDifficulty difficulty);
 	void MakeEnemies();
 	int GetMoney();
-	void SetMoney(int amount);
-	void CreateTower();
+	void SpendMoney(int amount);
+	void ActivateTowerBuilder();
+	void GameManager();
 	void UpgradeTower();
-	void CheckTowerPurchase(sf::ConvexShape* tower);
 	void UpdateAllStates();
 	void StartALevel();
 	void EndALevel();
 	void EndGame();
 
-	GameMaster(std::vector<sf::ConvexShape> &Worldmap);
+	GameMaster(std::vector<GroundTile*> Worldmap);
 	~GameMaster();
 };
 
