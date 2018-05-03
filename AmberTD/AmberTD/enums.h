@@ -8,13 +8,19 @@ const int TILE_SIZE = 80;
 const float ENEMY_SIZE = 30;
 const int BOARD_HEIGHT = 13;
 const int BOARD_WIDTH = 16;
+const int FPS = 60;
+const int MONSTERS_PER_WAVE = 10;
+const int ENRTY_OFFSET = 640;
 enum Flags
 {
-	noConstruction = 0,
-	towerUnderConstruction = 1,
-	gameOver = 2
-	
+	gameInProgress = 0,
+	towerUnderConstruction,
+	waiting,
+	levelOver,
+	gameWon,
+	gameOver
 };
+
 enum GroundType
 {
 	hill = 0,
@@ -37,9 +43,11 @@ enum EnemyType
 
 enum WaveDifficulty
 {
-	easy = 5,
-	medium = 10,
-	hard = 20
+	easy = 1,
+	medium,
+	hard,
+	veryhard,
+	insane
 
 };
 enum FullHdresolution 

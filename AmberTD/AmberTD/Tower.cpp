@@ -30,13 +30,6 @@ float Tower::GetRange()
 {
 	return range;
 }
-	
-
-
-sf::Vector2f Tower::GetPosition()
-{
-	return position;
-}
 
 void Tower::SetFireRate(float rate)
 {
@@ -48,14 +41,28 @@ float Tower::GetFireRate()
 }
 void Tower::Update(sf::RenderWindow &window)
 {
-	if (!isBuilt)
+	if (isBuilt)
+	{
+		
+	}
+	else
 	{
 		this->setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-		DrawRangeF(window);
 	}
+
 }
 
-sf::CircleShape Tower::DrawRangeF(sf::RenderWindow &window)
+bool Tower::GetIsReadyToFire()
+{
+	return isReadyToFire;
+}
+
+void Tower::SetIsReadyToFire(bool ready)
+{
+	isReadyToFire = ready;
+}
+
+sf::CircleShape Tower::DrawPlacementAssist(sf::RenderWindow &window)
 { 
 	rangeHelper.setRadius(range);
 	rangeHelper.setFillColor(sf::Color::Transparent);

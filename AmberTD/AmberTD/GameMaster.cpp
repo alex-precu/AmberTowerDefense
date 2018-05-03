@@ -32,26 +32,25 @@ void GameMaster::Render(sf::RenderWindow &window, Flags flag)
 		window.draw(*map[i]);
 	}
 
-	for (int i = 0; i < towerList.size(); i++)
+	for (int j = 0; j < towerList.size(); j++)
 	{
-		if (!towerList[i]->GetIsBuilt())
+		if (!towerList[j]->GetIsBuilt())
 		{
-			window.draw(towerList[i]->DrawRangeF(window));
+			window.draw(towerList[j]->DrawPlacementAssist(window));
 		}
-		towerList[i]->Update(window);
-		window.draw(*towerList[i]);
+		window.draw(*towerList[j]);
 	}
-	for (int i = 0;i < enemyList.size();i++)
+	for (int k = 0;k < enemyList.size();k++)
 	{
-		window.draw(*enemyList[i]);
+		window.draw(*enemyList[k]);
 	}
-	for (int i = 0;i < bulletList.size();i++)
+	for (int l = 0;l < bulletList.size();l++)
 	{
-		window.draw(*bulletList[i]);
+		window.draw(*bulletList[l]);
 	}
-	for (int i = 0;i < gui.size();i++)
+	for (int m = 0;m < gui.size();m++)
 	{
-		window.draw(*gui[i]);
+		window.draw(*gui[m]);
 	}
 
 	window.draw(moneyTxt);
@@ -125,7 +124,7 @@ bool GameMaster::Construction(sf::Vector2i pos)
 
 void GameMaster::ActivateTowerBuilder()
 {
-	towerList.push_back(new Tower(underContruction->GetPosition().x, underContruction->GetPosition().y, underContruction->GetType()));
+	towerList.push_back(new Tower(underContruction->getPosition().x, underContruction->getPosition().y, underContruction->GetType()));
 	underContruction = nullptr;
 }
 
@@ -166,7 +165,7 @@ void GameMaster::CancelTower()
 	}
 }
 
-sf::ConvexShape* GameMaster::SearchInTowers(sf::Vector2i pos)
+Tower* GameMaster::SearchInTowers(sf::Vector2f pos)
 {
 	for (int i = 0; i < towerList.size();i++)
 	{
@@ -188,27 +187,179 @@ void GameMaster::MakeEnemies()
 	
 }
 
+void GameMaster::GameCycle(sf::RenderWindow &window,Flags flag)
+{
+	if (GameManager(flag) != Flags::waiting)
+	{
+		if (GameManager(flag) == Flags::gameWon)
+		{
+			//do win
+		}
+		else if (GameManager(flag) == Flags::gameOver)
+		{
+			// doo widnow
+		}
+	}
+	else
+	{
+		//ManageShooting();
+		UpdateAllStates(window);
+		Render(window, flag);
+	}
+	
+}
+
+void GameMaster::UpdateAllStates(sf::RenderWindow &window)
+{
+	UpdateTowers(window);
+	UpdateEnemies();
+	UpdateBullets();
+	UpdateGUI();
+
+}
+
+void GameMaster::UpdateTowers(sf::RenderWindow &window)
+{
+	for (int i = 0;i < towerList.size();i++)
+	{
+		towerList[i]->Update(window);
+	}
+}
+
+void GameMaster::GetPath(GroundTile* lastLocation)
+{
+	
+}
+
+void GameMaster::UpdateEnemies()
+{
+	for (int i = 0;i < enemyList.size();i++)
+	{
+		//enemyList[i]->Update(map[50]->getPosition().x,map[50]->getPosition().y);
+	}
+}
+
+void GameMaster::UpdateBullets()
+{
+	for (int i = 0;i < bulletList.size();i++)
+	{
+		//bulletList[i]->Update();
+	}
+}
+
+
 void GameMaster::WaveMaker(WaveDifficulty difficulty)
 {
-	for (int i = 0; i < BOARD_HEIGHT - 1;i++)
+	enemyList.clear();
+
+	for (int i = 1; i < BOARD_HEIGHT;i++)
 	{
-		if (map[i + BOARD_WIDTH]->GetTiletype() == GroundType::path)
+		if (map[i*BOARD_WIDTH - 1]->GetTiletype() == GroundType::path)
 		{
-			for (int i = 0; i < difficulty; i++)
+			for (int j = 0; j < difficulty*MONSTERS_PER_WAVE; j++)
 			{
-				enemyList.push_back(new Enemy(map[i + BOARD_WIDTH]->getPosition().x + TILE_SIZE, map[i + BOARD_WIDTH]->getPosition().y + TILE_SIZE, EnemyType::normal));
+				enemyList.push_back(new Enemy(map[i*BOARD_WIDTH - 1]->getPosition().x + ENRTY_OFFSET + TILE_SIZE*j, map[i*BOARD_WIDTH - 1]->getPosition().y, EnemyType::normal));
+			}
+			break;
+		}
+	}
+		
+
+}
+
+Flags GameMaster::GameManager(Flags flag)
+{
+	static int level = 1;
+	if (playerLifes > 0)
+	{
+		if (level <= WaveDifficulty::insane && enemyList.empty())
+		{
+			switch (level)
+			{
+			case WaveDifficulty::easy:
+				WaveMaker(WaveDifficulty::easy);
+				break;
+			case WaveDifficulty::medium:
+				WaveMaker(WaveDifficulty::medium);
+				break;
+			case WaveDifficulty::hard:
+				WaveMaker(WaveDifficulty::hard);
+				break;
+			case WaveDifficulty::veryhard:
+				WaveMaker(WaveDifficulty::veryhard);
+				break;
+			case WaveDifficulty::insane:
+				WaveMaker(WaveDifficulty::insane);
+				break;
+			}
+			level++;
+			return Flags::gameInProgress;
+		}
+		else if (level > WaveDifficulty::insane)
+		{
+			return Flags::gameWon;
+		}
+		else
+			return Flags::waiting;
+	}
+	else return Flags::gameOver;
+}
+sf::CircleShape GameMaster::DrawTowerRange(sf::Vector2f coordinates)
+{
+	sf::CircleShape range(SearchInTowers(coordinates)->GetRange());
+	range.setFillColor(sf::Color::Transparent);
+	range.setOutlineColor(SearchInTowers(coordinates)->getFillColor());
+	range.setOrigin(sf::Vector2f(SearchInTowers(coordinates)->GetRange(), SearchInTowers(coordinates)->GetRange()));
+	range.setPosition(SearchInTowers(coordinates)->getPosition().x, SearchInTowers(coordinates)->getPosition().y);
+
+	return range;
+
+}
+
+void GameMaster::ManageShooting()
+{
+	for (int i = 0; i < towerList.size(); i++)
+	{
+		if (towerList[i]->GetIsReadyToFire())
+		{
+			for (int j = 0;j < enemyList.size();j++)
+			{
+				if (DrawTowerRange(towerList[i]->getPosition()).getGlobalBounds().contains(enemyList[j]->getPosition()))
+				{
+					bulletList.push_back(new Bullet(towerList[i],enemyList[j]));
+					towerList[i]->SetIsReadyToFire(false);
+				}
 			}
 		}
 	}
 }
 
-void GameMaster::GameManager()
+void GameMaster::ManageDamage()
 {
-	while (playerLifes > 0)
+	for (int i = 0; i < enemyList.size();i++)
 	{
+		for (int j = 0; j < bulletList.size(); j++)
+		{
+			if (enemyList[i]->getGlobalBounds().contains(bulletList[j]->getPosition()))
+			{
+				enemyList[i]->GiveDamage(bulletList[j]->GetDamage());
+				bulletList.erase(bulletList.begin() + j);
 
+				if (enemyList[i]->GetHP() <= 0)
+				{
+					enemyList.erase(enemyList.begin() + i);
+					
+				}
+			}
+		}
 	}
 }
+
+void GameMaster::GiveMoney(int amount)
+{
+	money += amount;
+}
+
 
 GameMaster::GameMaster(std::vector<GroundTile*> Worldmap) : map{Worldmap}, money{300}, playerLifes{10}
 {

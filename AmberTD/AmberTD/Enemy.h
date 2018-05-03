@@ -6,16 +6,22 @@
 class Enemy : public sf::ConvexShape
 {
 	int hp;
-	int speed ;
+	double speed ;
 	int type;
+	sf::Vector2i nextPath;
+	bool IsPathComplete = false;
+	int value;
 
 public:
 	Enemy(int xPos,int yPos, EnemyType type);
 	~Enemy();
 	Enemy();
-	void Update();
+	bool GetIsPathComplete();
+	void SetIsPathComplete();
+	void Draw();
+	void Update(int x, int y);
 	int GetHP();
-	void SetHp(int damage);
+	void GiveDamage(int damage);
 	int GetSpeed();
 };
 

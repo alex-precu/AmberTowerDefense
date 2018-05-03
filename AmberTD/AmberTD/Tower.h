@@ -19,7 +19,7 @@ class Tower : public sf::ConvexShape
 	bool isBuilt = false;
 	int price;
 	TowerType type;
-	sf::Vector2f position;
+	sf::Time collector = sf::Time::Zero;
 	void SetDamage();
 	void SetRange();
 	void SetFireRate(float rate);
@@ -30,7 +30,9 @@ public:
 	Tower(int xPos, int yPos, TowerType type);
 	~Tower();
 	std::string GetName();
-	sf::CircleShape DrawRangeF(sf::RenderWindow &window);
+	sf::CircleShape DrawPlacementAssist(sf::RenderWindow &window);
+	bool GetIsReadyToFire();
+	void SetIsReadyToFire(bool ready);
 	int GetPrice();
 	void UpgradeLevel();
 	int GetLevel();
@@ -41,7 +43,6 @@ public:
 	bool GetIsBuilt();
 	void Update(sf::RenderWindow &window);
 	//virtual void ReadyToFire();
-	sf::Vector2f GetPosition();
 	
 
 };

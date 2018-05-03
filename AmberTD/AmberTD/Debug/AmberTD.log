@@ -1,21 +1,24 @@
 ﻿  GameMaster.cpp
 c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(8): warning C4018: '<': signed/unsigned mismatch
 c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(35): warning C4018: '<': signed/unsigned mismatch
-c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(44): warning C4018: '<': signed/unsigned mismatch
-c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(48): warning C4018: '<': signed/unsigned mismatch
-c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(52): warning C4018: '<': signed/unsigned mismatch
-c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(110): warning C4018: '<': signed/unsigned mismatch
-c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(113): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(128): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(138): warning C4018: '<': signed/unsigned mismatch
-c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(141): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(171): warning C4018: '<': signed/unsigned mismatch
-c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(173): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(199): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  WorldBuilder.cpp
-  main.cpp
-c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\main.cpp(12): warning C4018: '<': signed/unsigned mismatch
-c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\main.cpp(14): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
-c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(179): warning C4715: 'GameMaster::SearchInTowers': not all control paths return a value
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(43): warning C4018: '<': signed/unsigned mismatch
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(47): warning C4018: '<': signed/unsigned mismatch
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(51): warning C4018: '<': signed/unsigned mismatch
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(109): warning C4018: '<': signed/unsigned mismatch
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(112): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(127): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(137): warning C4018: '<': signed/unsigned mismatch
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(140): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(170): warning C4018: '<': signed/unsigned mismatch
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(223): warning C4018: '<': signed/unsigned mismatch
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(236): warning C4018: '<': signed/unsigned mismatch
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(244): warning C4018: '<': signed/unsigned mismatch
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(261): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(261): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(321): warning C4018: '<': signed/unsigned mismatch
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(325): warning C4018: '<': signed/unsigned mismatch
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(339): warning C4018: '<': signed/unsigned mismatch
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(341): warning C4018: '<': signed/unsigned mismatch
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(345): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\antha\documents\github\ambertowerdefense\ambertd\ambertd\gamemaster.cpp(178): warning C4715: 'GameMaster::SearchInTowers': not all control paths return a value
   AmberTD.vcxproj -> C:\Users\antha\Documents\GitHub\AmberTowerDefense\AmberTD\Debug\AmberTD.exe
