@@ -29,13 +29,9 @@ void Bullet::Update()
 Bullet::Bullet(Tower* originTower, Enemy* destination ) : speed{4} , elementalDamage{0}
 {
 	this->destination = destination;
-	this->setPointCount(4);
-	this->setPoint(0, sf::Vector2f(TILE_SIZE / 2, 10));
-	this->setPoint(1, sf::Vector2f(TILE_SIZE - 10, TILE_SIZE / 2));
-	this->setPoint(2, sf::Vector2f(TILE_SIZE /2, TILE_SIZE -10));
-	this->setPoint(3, sf::Vector2f(TILE_SIZE / 2, TILE_SIZE - 10));
+	this->setRadius(10);
 	this->setPosition(originTower->getPosition());
-	this->setOrigin(TILE_SIZE / 2, TILE_SIZE / 2);
+	this->setOrigin(TILE_SIZE / 4, TILE_SIZE / 4);
 	this->setFillColor(sf::Color::Magenta);
 	this->SetDamage(originTower->GetDamage());
 }

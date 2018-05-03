@@ -9,7 +9,7 @@
 class Tower : public sf::ConvexShape
 {
 	std::string name = "Basic Tower";
-	sf::CircleShape rangeHelper;
+	sf::CircleShape *rangeHelper;
 	int level;
 	float damage;
 	float range;
@@ -19,25 +19,26 @@ class Tower : public sf::ConvexShape
 	bool isBuilt = false;
 	int price;
 	TowerType type;
+	sf::Clock clock;
 	sf::Time collector = sf::Time::Zero;
 	void SetDamage();
 	void SetRange();
 	void SetFireRate(float rate);
 
 public:
+	sf::CircleShape* GetRange();
 	TowerType GetType();
 	Tower();
 	Tower(int xPos, int yPos, TowerType type);
 	~Tower();
 	std::string GetName();
-	sf::CircleShape DrawPlacementAssist(sf::RenderWindow &window);
+	sf::CircleShape* DrawPlacementAssist(sf::RenderWindow &window);
 	bool GetIsReadyToFire();
 	void SetIsReadyToFire(bool ready);
 	int GetPrice();
 	void UpgradeLevel();
 	int GetLevel();
 	float GetDamage(); 
-	float GetRange();
 	float GetFireRate();
 	void SetState();
 	bool GetIsBuilt();

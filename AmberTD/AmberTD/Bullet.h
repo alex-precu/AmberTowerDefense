@@ -4,7 +4,7 @@
 #include <vector>
 #include "Tower.h"
 #include "Enemy.h"
-class Bullet : public sf::ConvexShape
+class Bullet : public sf::CircleShape
 {
 	float damage;
 	std::string element;

@@ -9,8 +9,9 @@ const float ENEMY_SIZE = 30;
 const int BOARD_HEIGHT = 13;
 const int BOARD_WIDTH = 16;
 const int FPS = 60;
-const int MONSTERS_PER_WAVE = 10;
+const int ENEMIES_PER_WAVE = 10;
 const int ENRTY_OFFSET = 640;
+const sf::Time TimePased = sf::seconds(1.f / 60.f);
 enum Flags
 {
 	gameInProgress = 0,

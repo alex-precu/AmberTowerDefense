@@ -17,7 +17,6 @@ int main()
 	Flags flag = Flags::gameInProgress;
 	sf::Clock clock;
 	sf::Time collector = sf::Time::Zero;
-	sf::Time TimePased = sf::seconds(1.f / 60.f);
 
 	float frameTime = 1.0f / 60.0f;
 

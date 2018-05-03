@@ -39,7 +39,7 @@ public:
 	void Render(sf::RenderWindow &window, Flags flag);
 	void UpdateGUI();
 	void CancelTower();
-	void WaveMaker(WaveDifficulty difficulty);
+	void WaveMaker(int difficulty);
 	void MakeEnemies();
 	int GetMoney();
 	void GiveMoney(int amount);
@@ -53,7 +53,7 @@ public:
 	void ManageShooting();
 	sf::CircleShape DrawTowerRange(sf::Vector2f coordinates);
 	void ManageDamage();
-	
+	int GetTileIndex(GroundTile* tile);
 
 
 	GameMaster(std::vector<GroundTile*> Worldmap);

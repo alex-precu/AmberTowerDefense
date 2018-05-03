@@ -35,7 +35,7 @@ void WorldBuilder::LoadLevel()
 		for (int x = 0; x < lvlWidth;x++)
 		{
 			int index = y * lvlWidth + x;
-			if (level[y][x] == 1)
+			if (level2[y][x] == 1)
 			{
 				map[index]->SetType(GroundType::path);
 			}

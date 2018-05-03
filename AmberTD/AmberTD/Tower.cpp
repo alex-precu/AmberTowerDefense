@@ -26,9 +26,9 @@ void Tower::SetRange()
 	range += range/5;
 }
 
-float Tower::GetRange()
+sf::CircleShape* Tower::GetRange()
 {
-	return range;
+	return rangeHelper;
 }
 
 void Tower::SetFireRate(float rate)
@@ -43,6 +43,15 @@ void Tower::Update(sf::RenderWindow &window)
 {
 	if (isBuilt)
 	{
+		if (!this->GetIsReadyToFire() && collector<sf::seconds(1))
+		{
+			collector += TimePased;
+		}
+		else
+		{
+			collector = clock.restart();
+			this->SetIsReadyToFire(true);
+		}
 		
 	}
 	else
@@ -62,14 +71,14 @@ void Tower::SetIsReadyToFire(bool ready)
 	isReadyToFire = ready;
 }
 
-sf::CircleShape Tower::DrawPlacementAssist(sf::RenderWindow &window)
+sf::CircleShape* Tower::DrawPlacementAssist(sf::RenderWindow &window)
 { 
-	rangeHelper.setRadius(range);
-	rangeHelper.setFillColor(sf::Color::Transparent);
-	rangeHelper.setOutlineColor(this->getFillColor());
-	rangeHelper.setOutlineThickness(3);
-	rangeHelper.setOrigin(sf::Vector2f(this->GetRange(), this->GetRange()) );
-	rangeHelper.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+	rangeHelper->setRadius(range);
+	rangeHelper->setFillColor(sf::Color::Transparent);
+	rangeHelper->setOutlineColor(this->getFillColor());
+	rangeHelper->setOutlineThickness(3);
+	rangeHelper->setOrigin(sf::Vector2f(120, 120));
+	rangeHelper->setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 	return rangeHelper;
 }
 
@@ -95,6 +104,8 @@ Tower::Tower(int xPos, int yPos, TowerType type) : damage{ 10 }, range{ 120 }, p
 	{
 		this->setFillColor(type == TowerType::fire ? sf::Color(255, 0, 0) : sf::Color(0, 0, 255));
 	}
+	rangeHelper = new sf::CircleShape(range);
+
 }
 TowerType Tower::GetType()
 {
@@ -109,6 +120,12 @@ int Tower::GetPrice()
 void Tower::SetState()
 {
 	isBuilt = true;
+	rangeHelper->setRadius(range);
+	rangeHelper->setFillColor(sf::Color::Transparent);
+	rangeHelper->setOutlineColor(this->getFillColor());
+	rangeHelper->setOutlineThickness(3);
+	rangeHelper->setOrigin(sf::Vector2f(120, 120));
+	rangeHelper->setPosition(this->getPosition().x, this->getPosition().y);
 }
 
 bool Tower::GetIsBuilt()

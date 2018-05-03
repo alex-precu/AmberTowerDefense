@@ -10,7 +10,7 @@ int Enemy::GetSpeed()
 	return speed;
 }
 
-Enemy::Enemy(int xPos, int yPos, EnemyType type) : hp{ 100 }, speed{ 2.66 }, value{200}
+Enemy::Enemy(int xPos, int yPos, EnemyType type) : hp{ 100 }, speed{ 2.66 }, value{200}, previousPath{nullptr}, nextPath{nullptr}, isDestinationreached{true}, currentPath{nullptr}
 {
 	this->setPointCount(6);
 	this->setPoint(0, sf::Vector2f(TILE_SIZE / 2, 25));
@@ -34,32 +34,40 @@ Enemy::Enemy(int xPos, int yPos, EnemyType type) : hp{ 100 }, speed{ 2.66 }, val
 
 }
 
-void Enemy::Update(int x, int y)
+void Enemy::Update()
 {
-	if (x < this->getPosition().x)
+	if (nextPath)
 	{
-		if (y < this->getPosition().y)
+		sf::Vector2f dirrection = nextPath->getPosition() - this->getPosition();
+		float lenght = (float)sqrt(pow(dirrection.x, 2) + pow(dirrection.y,2));
+		if (lenght < 5)
 		{
-			this->setPosition(this->getPosition().x - speed, this->getPosition().y - speed);
+			isDestinationreached = true;
+			if (currentPath)
+			{
+				previousPath = currentPath;
+			}
+
+			currentPath = nextPath;
+			nextPath = nullptr;
+			return;
 		}
-		else
-		{
-			this->setPosition(this->getPosition().x - speed, this->getPosition().y + speed);
-		}
-	}
-	else if (y < this->getPosition().y)
-	{
-		this->setPosition(this->getPosition().x + speed, this->getPosition().y - speed);
-	}
-	else
-	{
-		this->setPosition(this->getPosition().x + speed, this->getPosition().y + speed);
+
+		dirrection.x /= lenght;
+		dirrection.y /= lenght;
+		dirrection.x *= speed;
+		dirrection.y *= speed;
+		this->setPosition(this->getPosition()+dirrection);
 	}
 }
 
 void Enemy::GiveDamage(int damage)
 {
 	this->hp -= damage;
+}
+int Enemy::GetValue()
+{
+	return value;
 }
 Enemy::Enemy()
 {

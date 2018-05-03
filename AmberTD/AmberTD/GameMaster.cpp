@@ -36,7 +36,7 @@ void GameMaster::Render(sf::RenderWindow &window, Flags flag)
 	{
 		if (!towerList[j]->GetIsBuilt())
 		{
-			window.draw(towerList[j]->DrawPlacementAssist(window));
+			window.draw(*towerList[j]->DrawPlacementAssist(window));
 		}
 		window.draw(*towerList[j]);
 	}
@@ -202,7 +202,8 @@ void GameMaster::GameCycle(sf::RenderWindow &window,Flags flag)
 	}
 	else
 	{
-		//ManageShooting();
+		ManageDamage();
+		ManageShooting();
 		UpdateAllStates(window);
 		Render(window, flag);
 	}
@@ -235,20 +236,93 @@ void GameMaster::UpdateEnemies()
 {
 	for (int i = 0;i < enemyList.size();i++)
 	{
-		//enemyList[i]->Update(map[50]->getPosition().x,map[50]->getPosition().y);
+		Enemy* enemyPtr = enemyList[i];
+		if (enemyPtr->isDestinationreached == true)
+		{
+			if (!enemyPtr->currentPath)
+			{
+				enemyPtr->nextPath = map[47];
+			}
+			else
+			{
+				GroundTile* lastTile = enemyPtr->previousPath;
+				GroundTile* currentTile = enemyPtr->currentPath;
+				int currentIndex = GetTileIndex(currentTile);
+				GroundTile* left = nullptr;
+				GroundTile* right = nullptr;
+				GroundTile* up = nullptr;
+				GroundTile* down = nullptr;
+
+				if (!(currentIndex%BOARD_WIDTH == 0))
+				{
+					left = map[currentIndex - 1];
+				}
+				if (!((currentIndex + 1) % BOARD_WIDTH == 0))
+				{
+					right = map[currentIndex + 1];
+				}
+				if (!(currentIndex < BOARD_WIDTH))
+				{
+					up = map[currentIndex - BOARD_WIDTH];
+				}
+				if (!(currentIndex > (BOARD_HEIGHT*BOARD_WIDTH - BOARD_WIDTH)))
+				{
+					down = map[currentIndex + BOARD_WIDTH];
+				}
+
+				if (left && (left->GetTiletype()==GroundType::path) && (left!=lastTile))
+				{
+					enemyPtr->nextPath = left;
+					enemyPtr->isDestinationreached = false;
+				}
+				if (right && (right->GetTiletype() == GroundType::path) && (right != lastTile))
+				{
+					enemyPtr->nextPath = right;
+					enemyPtr->isDestinationreached = false;
+				}
+				if (up && (up->GetTiletype() == GroundType::path) && (up != lastTile))
+				{
+					enemyPtr->nextPath = up;
+					enemyPtr->isDestinationreached = false;
+				}
+				if (down && (down->GetTiletype() == GroundType::path) && (down != lastTile))
+				{
+					enemyPtr->nextPath = down;
+					enemyPtr->isDestinationreached = false;
+				}
+
+			}
+		}
+		enemyList[i]->Update();
 	}
 }
+
+int GameMaster::GetTileIndex(GroundTile* tile)
+{
+	for (int i = 0; i < map.size();i++)
+	{
+		if (map[i] == tile)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+
+
+
 
 void GameMaster::UpdateBullets()
 {
 	for (int i = 0;i < bulletList.size();i++)
 	{
-		//bulletList[i]->Update();
+		bulletList[i]->Update();
 	}
 }
 
 
-void GameMaster::WaveMaker(WaveDifficulty difficulty)
+void GameMaster::WaveMaker(int difficulty)
 {
 	enemyList.clear();
 
@@ -256,9 +330,9 @@ void GameMaster::WaveMaker(WaveDifficulty difficulty)
 	{
 		if (map[i*BOARD_WIDTH - 1]->GetTiletype() == GroundType::path)
 		{
-			for (int j = 0; j < difficulty*MONSTERS_PER_WAVE; j++)
+			for (int j = 0; j < 1; j++)
 			{
-				enemyList.push_back(new Enemy(map[i*BOARD_WIDTH - 1]->getPosition().x + ENRTY_OFFSET + TILE_SIZE*j, map[i*BOARD_WIDTH - 1]->getPosition().y, EnemyType::normal));
+				enemyList.push_back(new Enemy(map[i*BOARD_WIDTH - 1]->getPosition().x + +100 +TILE_SIZE*j, map[i*BOARD_WIDTH - 1]->getPosition().y, EnemyType::normal));
 			}
 			break;
 		}
@@ -274,24 +348,7 @@ Flags GameMaster::GameManager(Flags flag)
 	{
 		if (level <= WaveDifficulty::insane && enemyList.empty())
 		{
-			switch (level)
-			{
-			case WaveDifficulty::easy:
-				WaveMaker(WaveDifficulty::easy);
-				break;
-			case WaveDifficulty::medium:
-				WaveMaker(WaveDifficulty::medium);
-				break;
-			case WaveDifficulty::hard:
-				WaveMaker(WaveDifficulty::hard);
-				break;
-			case WaveDifficulty::veryhard:
-				WaveMaker(WaveDifficulty::veryhard);
-				break;
-			case WaveDifficulty::insane:
-				WaveMaker(WaveDifficulty::insane);
-				break;
-			}
+			WaveMaker(level);
 			level++;
 			return Flags::gameInProgress;
 		}
@@ -304,30 +361,31 @@ Flags GameMaster::GameManager(Flags flag)
 	}
 	else return Flags::gameOver;
 }
-sf::CircleShape GameMaster::DrawTowerRange(sf::Vector2f coordinates)
+/*sf::CircleShape GameMaster::DrawTowerRange(sf::Vector2f coordinates)
 {
-	sf::CircleShape range(SearchInTowers(coordinates)->GetRange());
-	range.setFillColor(sf::Color::Transparent);
-	range.setOutlineColor(SearchInTowers(coordinates)->getFillColor());
-	range.setOrigin(sf::Vector2f(SearchInTowers(coordinates)->GetRange(), SearchInTowers(coordinates)->GetRange()));
-	range.setPosition(SearchInTowers(coordinates)->getPosition().x, SearchInTowers(coordinates)->getPosition().y);
+	//sf::CircleShape range(SearchInTowers(coordinates)->GetRange());
+	//range.setFillColor(sf::Color::Transparent);
+	//range.setOutlineColor(SearchInTowers(coordinates)->getFillColor());
+//range.setOrigin(sf::Vector2f(SearchInTowers(coordinates)->GetRange(), SearchInTowers(coordinates)->GetRange()));
+	//.range.setPosition(SearchInTowers(coordinates)->getPosition().x, SearchInTowers(coordinates)->getPosition().y);
 
-	return range;
-
-}
+	//return range;
+	return true;
+}*/
 
 void GameMaster::ManageShooting()
 {
 	for (int i = 0; i < towerList.size(); i++)
 	{
-		if (towerList[i]->GetIsReadyToFire())
+		if (towerList[i]->GetIsBuilt() && towerList[i]->GetIsReadyToFire())
 		{
 			for (int j = 0;j < enemyList.size();j++)
 			{
-				if (DrawTowerRange(towerList[i]->getPosition()).getGlobalBounds().contains(enemyList[j]->getPosition()))
+				if (towerList[i]->GetRange()->getGlobalBounds().contains(enemyList[j]->getPosition()))
 				{
 					bulletList.push_back(new Bullet(towerList[i],enemyList[j]));
 					towerList[i]->SetIsReadyToFire(false);
+					break;
 				}
 			}
 		}
@@ -338,19 +396,21 @@ void GameMaster::ManageDamage()
 {
 	for (int i = 0; i < enemyList.size();i++)
 	{
+
 		for (int j = 0; j < bulletList.size(); j++)
 		{
-			if (enemyList[i]->getGlobalBounds().contains(bulletList[j]->getPosition()))
-			{
-				enemyList[i]->GiveDamage(bulletList[j]->GetDamage());
-				bulletList.erase(bulletList.begin() + j);
 
-				if (enemyList[i]->GetHP() <= 0)
+				if (enemyList[i]->getGlobalBounds().contains(bulletList[j]->getPosition()))// crash
 				{
-					enemyList.erase(enemyList.begin() + i);
-					
+					enemyList[i]->GiveDamage(bulletList[j]->GetDamage());
+					bulletList.erase(bulletList.begin() + j);
 				}
-			}
+		}
+		if (enemyList[i]->GetHP() <= 0)
+		{
+			GiveMoney(enemyList[i]->GetValue());
+			enemyList.erase(enemyList.begin() + i);
+
 		}
 	}
 }
