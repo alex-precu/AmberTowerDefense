@@ -11,7 +11,8 @@ const int BOARD_WIDTH = 16;
 const int FPS = 60;
 const int ENEMIES_PER_WAVE = 10;
 const int ENRTY_OFFSET = 640;
-const sf::Time TimePased = sf::seconds(1.f / 60.f);
+const sf::Time TIME_PASED = sf::seconds(1.f / 60.f);
+const int ENTRY_POINT_INDEX = 47;
 enum Flags
 {
 	gameInProgress = 0,
@@ -19,7 +20,8 @@ enum Flags
 	waiting,
 	levelOver,
 	gameWon,
-	gameOver
+	gameOver,
+	restartGame
 };
 
 enum GroundType

@@ -3,14 +3,16 @@
 #include <string>
 #include <vector>
 #include "Tower.h"
-#include "Enemy.h"
+#include "GameMaster.h"
+
 class Bullet : public sf::CircleShape
 {
 	float damage;
-	std::string element;
+	TowerType element;
 	float elementalDamage;
 	float speed;
 	Enemy* destination;
+	bool missed;
 
 public:
 	void Update();
@@ -19,8 +21,8 @@ public:
 	~Bullet();
 	void SetDamage(float damage);
 	float GetDamage();
-	void SetElement(std::string& element);
-	std::string GetElement();
+	void SetElement(TowerType type);
+	TowerType GetElement();
 	void SetElementalDamage(float damage);
 	float GetElementalDamage();
 	bool CollisionDetect();

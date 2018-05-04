@@ -24,16 +24,19 @@ void Bullet::Update()
 		{
 			this->setPosition(this->getPosition().x + speed, this->getPosition().y + speed);
 		}
-	
+
 }
-Bullet::Bullet(Tower* originTower, Enemy* destination ) : speed{4} , elementalDamage{0}
+	
+Bullet::Bullet(Tower* originTower, Enemy* destination ) : speed{4} , elementalDamage{0}, missed{false}
 {
 	this->destination = destination;
 	this->setRadius(10);
 	this->setPosition(originTower->getPosition());
 	this->setOrigin(TILE_SIZE / 4, TILE_SIZE / 4);
-	this->setFillColor(sf::Color::Magenta);
+	this->setFillColor(originTower->getFillColor());
 	this->SetDamage(originTower->GetDamage());
+	this->SetElementalDamage(originTower->GetElementalDamage());
+	this->SetElement(originTower->GetType());
 }
 Bullet::Bullet(float damage, std::string element, float elementalDamage)
 {
@@ -55,12 +58,12 @@ float Bullet::GetDamage()
 	return damage;
 }
 
-void Bullet::SetElement(std::string& element)
+void Bullet::SetElement(TowerType element)
 {
 	this->element = element;
 }
 
-std::string Bullet::GetElement()
+TowerType Bullet::GetElement()
 {
 	return element;
 }

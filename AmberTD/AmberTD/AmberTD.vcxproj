@@ -124,29 +124,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ArmouredEnemy.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="FastEnemy.cpp" />
-    <ClCompile Include="FireTower.cpp" />
     <ClCompile Include="GameMaster.cpp" />
     <ClCompile Include="GroundTile.cpp" />
-    <ClCompile Include="IceTower.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Store.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="WorldBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArmouredEnemy.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="enums.h" />
-    <ClInclude Include="FastEnemy.h" />
-    <ClInclude Include="FireTower.h" />
     <ClInclude Include="GameMaster.h" />
     <ClInclude Include="GroundTile.h" />
-    <ClInclude Include="IceTower.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="WorldBuilder.h" />
   </ItemGroup>

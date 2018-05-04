@@ -4,6 +4,8 @@
 
 GroundTile::GroundTile(int xPos, int yPos, int type)
 {
+
+
 	this->setPointCount(4);
 	this->setOrigin(TILE_SIZE / 2, TILE_SIZE / 2);
 	this->setPoint(0, sf::Vector2f(0,0));
@@ -18,6 +20,8 @@ GroundTile::GroundTile(int xPos, int yPos, int type)
 GroundTile::~GroundTile()
 {
 }
+
+
 
 bool GroundTile::GetIsEmpty()
 {

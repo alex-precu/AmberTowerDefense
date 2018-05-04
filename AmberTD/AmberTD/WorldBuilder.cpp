@@ -30,6 +30,9 @@ void WorldBuilder::CreateWorld()
 
 void WorldBuilder::LoadLevel()
 {
+
+
+
 	for (int y = 0;y < lvlHeight; y++)
 	{
 		for (int x = 0; x < lvlWidth;x++)

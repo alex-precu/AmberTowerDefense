@@ -60,21 +60,6 @@
     <ClCompile Include="GameMaster.cpp">
       <Filter>Source Files\Masters</Filter>
     </ClCompile>
-    <ClCompile Include="Store.cpp">
-      <Filter>Source Files\Masters</Filter>
-    </ClCompile>
-    <ClCompile Include="FireTower.cpp">
-      <Filter>Source Files\Actors\Towers</Filter>
-    </ClCompile>
-    <ClCompile Include="IceTower.cpp">
-      <Filter>Source Files\Actors\Towers</Filter>
-    </ClCompile>
-    <ClCompile Include="ArmouredEnemy.cpp">
-      <Filter>Source Files\Actors\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="FastEnemy.cpp">
-      <Filter>Source Files\Actors\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="WorldBuilder.cpp">
       <Filter>Source Files\WorldBuilder</Filter>
     </ClCompile>
@@ -94,18 +79,6 @@
     </ClInclude>
     <ClInclude Include="GameMaster.h">
       <Filter>Header Files\Masters</Filter>
-    </ClInclude>
-    <ClInclude Include="FireTower.h">
-      <Filter>Header Files\Actors\Towers</Filter>
-    </ClInclude>
-    <ClInclude Include="IceTower.h">
-      <Filter>Header Files\Actors\Towers</Filter>
-    </ClInclude>
-    <ClInclude Include="ArmouredEnemy.h">
-      <Filter>Header Files\Actors\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="FastEnemy.h">
-      <Filter>Header Files\Actors\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="WorldBuilder.h">
       <Filter>Header Files\WorldBuilder</Filter>

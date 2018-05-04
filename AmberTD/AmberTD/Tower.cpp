@@ -45,7 +45,7 @@ void Tower::Update(sf::RenderWindow &window)
 	{
 		if (!this->GetIsReadyToFire() && collector<sf::seconds(1))
 		{
-			collector += TimePased;
+			collector += TIME_PASED;
 		}
 		else
 		{
@@ -87,7 +87,7 @@ std::string Tower::GetName()
 	return name;
 }
 
-Tower::Tower(int xPos, int yPos, TowerType type) : damage{ 10 }, range{ 120 }, price{ 100 }, fireRate{ 2 }, level{1}
+Tower::Tower(int xPos, int yPos, TowerType type) : damage{ 10 }, range{ 120 }, price{ 100 }, fireRate{ 2 }, level{1}, elementalDamge{0}
 {
 	this->setPointCount(3);
 	this->setPoint(0, sf::Vector2f(TILE_SIZE/2, TILE_SIZE/4));
@@ -105,7 +105,30 @@ Tower::Tower(int xPos, int yPos, TowerType type) : damage{ 10 }, range{ 120 }, p
 		this->setFillColor(type == TowerType::fire ? sf::Color(255, 0, 0) : sf::Color(0, 0, 255));
 	}
 	rangeHelper = new sf::CircleShape(range);
+	SetTowerTraits(type);
+	
+}
 
+float Tower::GetElementalDamage()
+{
+	return elementalDamge;
+}
+
+void Tower::SetTowerTraits(TowerType type)
+{
+	switch (type)
+	{
+	case fire:
+		elementalDamge = 50;
+		price = 500;
+		break;
+	case ice:
+		elementalDamge = 20;
+		price = 800;
+		break;
+	default:
+		break;
+	}
 }
 TowerType Tower::GetType()
 {

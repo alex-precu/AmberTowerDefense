@@ -12,6 +12,7 @@ class Tower : public sf::ConvexShape
 	sf::CircleShape *rangeHelper;
 	int level;
 	float damage;
+	float elementalDamge;
 	float range;
 	float fireRate;
 	bool isReadyToFire = true;
@@ -24,6 +25,7 @@ class Tower : public sf::ConvexShape
 	void SetDamage();
 	void SetRange();
 	void SetFireRate(float rate);
+	void SetTowerTraits(TowerType type);
 
 public:
 	sf::CircleShape* GetRange();
@@ -37,8 +39,9 @@ public:
 	void SetIsReadyToFire(bool ready);
 	int GetPrice();
 	void UpgradeLevel();
-	int GetLevel();
-	float GetDamage(); 
+	int GetLevel(); 
+	float GetElementalDamage();
+	float GetDamage();
 	float GetFireRate();
 	void SetState();
 	bool GetIsBuilt();

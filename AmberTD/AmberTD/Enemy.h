@@ -4,14 +4,20 @@
 #include "enums.h"
 #include "GroundTile.h"
 #include <math.h>
+class Bullet;
 
 class Enemy : public sf::ConvexShape
-{
+{	
 	int hp;
 	double speed ;
 	int type;
-	bool IsPathComplete = false;
+	bool IsPathComplete;
+	bool hasWon;
+	bool  isAffected;
+
+	float OTdamage;
 	int value;
+	void DrawEnemy(EnemyType type);
 
 public:
 	GroundTile * nextPath;
@@ -25,9 +31,10 @@ public:
 	bool GetIsPathComplete();
 	void SetIsPathComplete();
 	void Draw();
+	bool GetHasWon();
 	void Update();
 	int GetHP();
-	void GiveDamage(int damage);
+	void GiveDamage(Bullet* bullet);
 	int GetSpeed();
 };
 

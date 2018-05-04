@@ -6,6 +6,7 @@ class GroundTile : public sf::ConvexShape
 {
 	bool isEmpty = true;
 	char tileType = GroundType::hill;
+	sf::Texture tileset;
 
 public:
 	void SetIsEmpty(bool state);
